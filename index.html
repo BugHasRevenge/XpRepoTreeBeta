@@ -21,10 +21,6 @@
             box-sizing: border-box;
         }
 
-        html, body {
-            color-scheme: only dark !important;
-        }
-
         html {
             -webkit-text-size-adjust: 100%;
             width: 100%;
@@ -32,6 +28,11 @@
             overflow: hidden;
             position: fixed;
             overscroll-behavior: none;
+            background: #280330;
+        }
+
+        html.light-mode {
+            background: #2C1232;
         }
 
         body {
@@ -54,10 +55,6 @@
         }
 
         body.light-mode {
-            background: linear-gradient(135deg, #9253B7 0%, #2C1232 80%);
-        }
-
-        html.light-mode {
             background: linear-gradient(135deg, #9253B7 0%, #2C1232 80%);
         }
 
