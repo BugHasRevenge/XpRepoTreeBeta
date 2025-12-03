@@ -21,41 +21,41 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            color-scheme: only dark !important;
+        }
+
         html {
             -webkit-text-size-adjust: 100%;
             width: 100%;
             height: 100%;
             overflow: hidden;
             position: fixed;
-            overscroll-behavior: none;
-            background: #280330;
-        }
-
-        html.light-mode {
-            background: #2C1232;
         }
 
         body {
             font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: linear-gradient(to bottom, #6F2D80 0%, #280330 100%);
+            background: linear-gradient(135deg, #6F2D80 0%, #280330 100%);
             width: 100%;
-            height: 100vh;
-            height: 100dvh;
+            min-height: 100vh;
+            min-height: -webkit-fill-available;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 30px;
-            position: fixed;
-            overflow: hidden;
+            position: relative;
+            overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             -webkit-tap-highlight-color: transparent;
             transition: background 0.3s ease;
-            overscroll-behavior-y: contain;
-            touch-action: pan-y;
         }
 
         body.light-mode {
-            background: linear-gradient(to bottom, #9253B7 0%, #2C1232 100%);
+            background: linear-gradient(135deg, #9253B7 0%, #2C1232 100%);
+        }
+
+        html.light-mode {
+            background: linear-gradient(135deg, #9253B7 0%, #2C1232 100%);
         }
 
         body::before {
@@ -149,8 +149,6 @@
             padding: 0 20px;
             display: flex;
             flex-direction: column;
-            max-height: 100vh;
-            max-height: 100dvh;
         }
 
         .content-top {
@@ -159,7 +157,7 @@
 
         .content-bottom {
             flex: 0;
-            margin-top: 35px;
+            margin-top: 35;
             padding-bottom: 20px;
         }
 
@@ -656,30 +654,6 @@
                 document.body.classList.add('device-desktop');
             }
         }
-
-        // Prevent scrolling but allow pull-to-refresh on iOS
-        let startY = 0;
-        let isScrollingDown = false;
-
-        document.addEventListener('touchstart', function(e) {
-            startY = e.touches[0].pageY;
-        }, { passive: true });
-
-        document.addEventListener('touchmove', function(e) {
-            const currentY = e.touches[0].pageY;
-            const deltaY = currentY - startY;
-            
-            // Allow pull-to-refresh only when pulling down from the top
-            if (window.scrollY === 0 && deltaY > 0) {
-                // This is a pull-to-refresh gesture, allow it
-                return;
-            }
-            
-            // Prevent all other scrolling (up and down when not at top)
-            if (e.cancelable) {
-                e.preventDefault();
-            }
-        }, { passive: false });
 
         // Run on load
         detectDevice();
